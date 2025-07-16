@@ -2,7 +2,10 @@
 """
 Created on Tue Jul 15 19:24:06 2025
 
-@author: BEST
+@author: harivonyratefiarison
+
+about : This script scrap all available reddit topic list with link
+
 """
 
 # Get data
@@ -15,7 +18,6 @@ response = crawl(query=link)
 
 # Decode raw html
 #----------------------------
-
 clean_html = response.encode('utf-8').decode('unicode_escape')
 
 
@@ -37,3 +39,6 @@ for topic in topics:
     href = topic.get('href')
     print(f"{text} : {href}")
     topics_link.append({text: href})
+    
+
+# add page loop
