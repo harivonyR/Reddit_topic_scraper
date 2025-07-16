@@ -33,12 +33,12 @@ soup = BeautifulSoup(clean_html, 'html.parser')
 articles = soup.select('article')
 
 # get post details
-article = articles[5]
-article_title = article["aria-label"]
-article_author = article.find("shreddit-post")["author"]
-article_content = article.find_all("p")
+for article in articles :
 
-for content in article_content :
-    print(content)
-
+    article_title = article["aria-label"]
+    article_link = article.find('shreddit-post')['content-href']
+    article_author = article.find("shreddit-post")["author"]
+    
+    print(f"{article_title} : {article_link}")
+    print("-----------------------")
 
