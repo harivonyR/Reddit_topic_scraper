@@ -10,13 +10,15 @@ Topic Link : https://www.reddit.com/topics/a-1/
 
 """
 
-
-# 1 - Fetch HTML data (crawler)
-#----------------------
 from script.piloterr import website_crawler
 from bs4 import BeautifulSoup
 
-# Get post from a redit topics URL
+
+# 0 - List every existing Reddit topics
+#------------------------------------------------------------------------------
+
+# 1 - Fetch post data with post_link (we need this to fetch comments later)
+#------------------------------------------------------------------------------
 def get_post(url="https://www.reddit.com/t/american_top_team/"):
     
     topics_link = url      # url is a topic link on reddit
@@ -48,10 +50,11 @@ def get_post(url="https://www.reddit.com/t/american_top_team/"):
     
     return posts
 
+
+# 2 - Fetch post data with post_link (we need this to fetch comments later)
+#------------------------------------------------------------------------------
 def get_comment(url):
-    # scraping comment
-    # ----------------
-    
+
     # topics = https://www.reddit.com/t/american_top_team/
     # post_link = /r/MMA/comments/syis7n/did_any_mma_team_ever_had_a_better_year_than/
     
