@@ -22,6 +22,7 @@ def website_renderer(query):
 
     url = "https://piloterr.com/api/v2/website/rendering"
     
+    # url for test
     querystring = {"query":"https://www.reddit.com/r/MMA/comments/syis7n/did_any_mma_team_ever_had_a_better_year_than/","wait_in_seconds":"20"}
     
     headers = {"x-api-key": x_api_key}
