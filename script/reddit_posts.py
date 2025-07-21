@@ -10,19 +10,16 @@ Topic Link : https://www.reddit.com/topics/a-1/
 
 """
 
-from script.piloterr import website_crawler
+from script.piloterr import website_crawler, website_rendering
 from bs4 import BeautifulSoup
 
 
-# 0 - List every existing Reddit topics
-#------------------------------------------------------------------------------
-
 # 1 - Fetch post data with post_link (we need this to fetch comments later)
 #------------------------------------------------------------------------------
-def get_post(url="https://www.reddit.com/t/american_top_team/"):
+def scrape_post(topic_url):
     
-    topics_link = url      # url is a topic link on reddit
-    response = website_crawler(query=topics_link)
+    # url is a topic link on reddit
+    response = website_rendering(site_url=topic_url)
     
     # Decode raw HTML
     clean_html = response.encode('utf-8').decode('unicode_escape')
@@ -51,34 +48,9 @@ def get_post(url="https://www.reddit.com/t/american_top_team/"):
     return posts
 
 
-# 2 - Fetch post data with post_link (we need this to fetch comments later)
-#------------------------------------------------------------------------------
-def get_comment(url):
-
-    # topics = https://www.reddit.com/t/american_top_team/
-    # post_link = /r/MMA/comments/syis7n/did_any_mma_team_ever_had_a_better_year_than/
-    
-    # create a link to access the post with comment
-    #reddit_post =  "https://www.reddit.com"+post["link"]
-    
-    #crete a sample link
-    
-    reddit_post = "https://www.reddit.com/r/MMA/comments/syis7n/did_any_mma_team_ever_had_a_better_year_than/"
-    
-    response = website_crawler(query = reddit_post)
-    
-    # Decode raw HTML
-    clean_html = response.encode('utf-8').decode('unicode_escape')
-    soup = BeautifulSoup(clean_html, 'html.parser')
-    
-    # select comments
-    comments = soup.find_all('div') #attrs={'slot': 'comment'})
-    
-
-
 def test():
-    reddit_topic = "https://www.reddit.com/t/american_top_team/"
-    posts = get_post(url=reddit_topic)
+    american_top_tem = "https://www.reddit.com/t/american_top_team/"
+    posts = scrape_post(topic_url=american_top_tem)
     post = posts[5]
         
     reddit_post =  "https://www.reddit.com"+post["link"]

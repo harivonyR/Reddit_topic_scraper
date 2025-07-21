@@ -5,13 +5,17 @@ Created on Sun Jul 20 16:46:40 2025
 @author: BEST
 """
 
-from script.reddit_topics import get_all_reddit_topic_list, save_list
+from script.reddit_topics import scrape_all, save_csv
 
 
 
-# get all existing topics on reddit
-all_reddit_topics = get_all_reddit_topic_list()
-save_list(all_reddit_topics,"output/all_reddit_topics.csv")
 
+# 0 - get all links of existing topics on reddit
+#-------------------------------------------------
+all_reddit_topics = scrape_all()
 
-# loop topics and get comment
+# save links in a csv file 
+save_csv(all_reddit_topics,"output/all_reddit_topics.csv") 
+
+# 1 - scroll and get post in a topic 
+#-------------------------------------------------
