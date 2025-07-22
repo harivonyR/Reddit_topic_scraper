@@ -10,13 +10,10 @@ from bs4 import BeautifulSoup
 
 # 2 - Fetch post data with post_link (we need this to fetch comments later)
 #------------------------------------------------------------------------------
-def get_comment(post_url,wait_in_seconds=20):
-
-    # topics = https://www.reddit.com/t/american_top_team/
-    #post_url = "https://www.reddit.com/r/SquaredCircle/comments/qthtwn/post_aew_full_gear_2021_match_discussion_thread/"
-    post_url = "https://www.reddit.com/r/IndiaCricket/comments/1dniwap/aaron_finch_shuts_up_dk_during_commentary/"
-    
-    response = website_rendering(site_url = post_url,wait_in_seconds=10,scroll=1)
+def scrape_comment(post_url,wait_in_seconds=10, scroll=0):
+    print("-------------------------------")
+    print(f"scraping comment from {post_url}")
+    response = website_rendering(site_url = post_url,wait_in_seconds=wait_in_seconds,scroll=scroll)
     
     # Decode raw HTML
     clean_html = response.encode('utf-8').decode('unicode_escape')
@@ -54,17 +51,16 @@ def get_comment(post_url,wait_in_seconds=20):
                 "content": [p.get_text(strip=True) for p in comment.find_all("p")] or None
             }
             comment_details.append(data)
-          
+            print(f"author comment scrapped : {comment.get('author', '#N/A')}")
+            
         except Exception as e:
             print(f"error: {e}")
             continue
-
+        
     return {"post_details":post_details,"comment_details":comment_details}
     
     
-def debugg():
-    post_url = "https://www.reddit.com/r/IndiaCricket/comments/1dniwap/aaron_finch_shuts_up_dk_during_commentary/"
-    comment = get_comment(post_url)
-    pass
-    
+if __name__=="__main__":
+    reddit = "https://www.reddit.com/r/IndiaCricket/comments/1dniwap/aaron_finch_shuts_up_dk_during_commentary/"
+    comment = scrape_comment(post_url=reddit,wait_in_seconds=5, scroll=2)
     

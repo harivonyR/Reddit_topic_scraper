@@ -5,7 +5,7 @@ Created on Tue Jul 15 19:24:06 2025
 @author: harivonyratefiarison
 
 This script scrapes all available Reddit topics with their links.
-Optimized for SEO scraping.
+
 """
 
 from script.piloterr import website_crawler
@@ -121,8 +121,6 @@ def debug():
     print(f"page_list = {page_list}")
 
 if __name__ == "__main__":
-    """
-    Run full process and save all topics to CSV.
-    """
-    full_topics_list = scrape_all()
+    
+    full_topics_list = scrape_all() # scrape all existing reddit topic
     save_csv(full_topics_list, destination="output/all_reddit_topics.csv")
