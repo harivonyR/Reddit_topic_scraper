@@ -1,4 +1,3 @@
-````markdown
 # 🔍 Reddit Scraper using Piloterr API
 Reddit topic scraper using Piloterr Website Crawler API's.
 
