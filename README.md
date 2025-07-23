@@ -33,13 +33,13 @@ The output can be stored in CSVs or JSON-like structures, making it directly usa
 
 ## 2️⃣ Setup, Dependencies & Running `main.py`
 
-### 📦 Install dependencies
+### Install dependencies
 
 ```bash
 pip install requests beautifulsoup4
 ```
 
-### 🔐 Add your Piloterr API key
+### Add your Piloterr API key
 
 Copy the example credentials:
 
@@ -53,7 +53,7 @@ Edit `credential.py` and paste your API key (visit piloterr.com if you don't hav
 x_api_key = "your_actual_api_key_here"
 ```
 
-### ▶️ Run the main script
+### Run the main script
 
 ```bash
 python main.py
@@ -69,14 +69,14 @@ This runs the full pipeline:
 
 ## 3️⃣ Function Breakdown
 
-### a) 🔌 `piloterr.py` – API Integration
+### a) `piloterr.py` – API Integration
 
-#### ✅ `website_crawler(site_url)`
+#### `website_crawler(site_url)`
 
 * Basic HTML fetcher (no JS rendering)
 * Used for static pages like Reddit Topics directory
 
-#### ✅ `website_rendering(site_url, wait_in_seconds, scroll)`
+#### `website_rendering(site_url, wait_in_seconds, scroll)`
 
 * Simulates full browser (scrolling included)
 * Ideal for dynamic content: post lists, comment trees
@@ -89,11 +89,11 @@ This runs the full pipeline:
 
 ---
 
-### b) 🧠 `reddit_topics.py` – Scraping Reddit Topics
+### b) `reddit_topics.py` – Scraping Reddit Topics
 
 Extracts all categorized topics from [reddit.com/topics](https://www.reddit.com/topics).
 
-#### 🔁 Functions:
+#### Functions:
 
 | Function             | Description                                         |
 | -------------------- | --------------------------------------------------- |
@@ -107,11 +107,11 @@ Each topic = `{ "Movies": "/t/movies/" }`
 
 ---
 
-### c) 📰 `reddit_posts.py` – Scraping Posts in a Topic
+### c) `reddit_posts.py` – Scraping Posts in a Topic
 
 Extracts post data from a topic link like `https://www.reddit.com/t/science/`.
 
-#### ✅ `scrape_post(topic_url, wait_in_seconds, scroll)`
+#### `scrape_post(topic_url, wait_in_seconds, scroll)`
 
 Returns a list of post dicts:
 
@@ -126,15 +126,15 @@ Returns a list of post dicts:
 }
 ```
 
-📌 Best used with `scroll=2` or higher for infinite feeds.
+🧠 Best used with `scroll=2` or higher for infinite feeds.
 
 ---
 
-### 3d) 💬 `reddit_comments.py` Scraping Comments from a Post
+### d) `reddit_comments.py` Scraping Comments from a Post
 
 Retrieves both post metadata and structured comment trees.
 
-#### ✅ `scrape_comment(post_url, wait_in_seconds, scroll)`
+#### `scrape_comment(post_url, wait_in_seconds, scroll)`
 
 Returns:
 
@@ -162,6 +162,6 @@ Supports:
 * Nested replies via `depth`
 * Metadata like `parent_id`, `score`, `timestamp`
 
-📌 Ideal for NLP/sentiment studies or reply-chain reconstruction.
+🧠 Ideal for NLP/sentiment studies or reply-chain reconstruction.
 
 ---
