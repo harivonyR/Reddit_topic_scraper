@@ -8,7 +8,7 @@ This project is a modular, production-ready web scraping pipeline for Reddit usi
 - AI dataset generation  
 - Reddit trend monitoring  
 
-The scraper simulates real browser behavior to capture dynamic, JavaScript-heavy content such as comments and post lists, thanks to Piloterr’s headless rendering API.
+Even for large-scale scraping, Piloterr avoids blocking issues by leveraging a vast proxy pool and robust anti-bot bypass mechanisms.
 
 ---
 
@@ -69,7 +69,7 @@ This runs the full pipeline:
 
 ## 3️⃣ Function Breakdown
 
-### 3a) 🔌 `piloterr.py` – API Integration
+### a) 🔌 `piloterr.py` – API Integration
 
 #### ✅ `website_crawler(site_url)`
 
@@ -89,7 +89,7 @@ This runs the full pipeline:
 
 ---
 
-### 3b) 🧠 `reddit_topics.py` – Scraping Reddit Topics
+### b) 🧠 `reddit_topics.py` – Scraping Reddit Topics
 
 Extracts all categorized topics from [reddit.com/topics](https://www.reddit.com/topics).
 
@@ -107,7 +107,7 @@ Each topic = `{ "Movies": "/t/movies/" }`
 
 ---
 
-### 3c) 📰 `reddit_posts.py` – Scraping Posts in a Topic
+### c) 📰 `reddit_posts.py` – Scraping Posts in a Topic
 
 Extracts post data from a topic link like `https://www.reddit.com/t/science/`.
 

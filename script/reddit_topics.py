@@ -11,6 +11,7 @@ This script scrapes all available Reddit topics with their links.
 from script.piloterr import website_crawler
 from bs4 import BeautifulSoup
 import csv
+import os
 
 def get_letter_pages():
     """
@@ -27,7 +28,7 @@ def get_letter_pages():
     letters_href = ["https://www.reddit.com" + link.get("href") for link in links]
     letters_href.insert(0, site_url)
 
-    print(letters_href)
+    print(f"> all topics found by lettre : \n {letters_href}")
     return letters_href
 
 def get_subpages(site_url):
@@ -43,7 +44,7 @@ def get_subpages(site_url):
     pages_href = ["https://www.reddit.com" + page.get("href") for page in pages]
     pages_href.insert(0, site_url)
 
-    print(pages_href)
+    print("> pages href : {pages_href}")
     return pages_href
 
 def scrape_topics(site_url):
@@ -94,6 +95,9 @@ def save_csv(full_topics_list, destination="output/all_reddit_topics.csv"):
     Save topics to CSV. Overwrites existing file.
     Each item = {topic: link}
     """
+    # create the output folder if it doesn't exist yet
+    os.makedirs(os.path.dirname(destination), exist_ok=True)
+
     with open(destination, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(["topic", "link"])
@@ -102,7 +106,8 @@ def save_csv(full_topics_list, destination="output/all_reddit_topics.csv"):
             for topic, link in topic_dict.items():
                 writer.writerow([topic, link])
 
-    print("file saved!")
+    print(f"> File saved to {destination}")
+
 
 def debug():
     """
