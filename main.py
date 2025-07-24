@@ -17,27 +17,6 @@ from script.reddit_comments import scrape_comment
 
 
 # -------------------------------------------------------
-# STEP-BY-STEP TEST: scrape topics, posts, and comments
-# -------------------------------------------------------
-
-if __name__ == "__main__":
-    print("Step 1: Scraping all Reddit topics...")
-    all_reddit_topics = scrape_all()
-    save_csv(all_reddit_topics, "output/all_reddit_topics.csv")
-    print(f"{len(all_reddit_topics)} topics scraped and saved.")
-
-    print("\nStep 2: Scraping posts from a single topic...")
-    sample_topic_link = "https://www.reddit.com/t/american_top_team/"
-    posts = scrape_post(sample_topic_link, wait_in_seconds=10, scroll=0)
-    print(f"{len(posts)} posts scraped from topic.")
-
-    print("\nStep 3: Scraping comments from a sample post...")
-    sample_post_link = "https://www.reddit.com/r/IndiaCricket/comments/1dniwap/aaron_finch_shuts_up_dk_during_commentary/"
-    comments = scrape_comment(post_url=sample_post_link, wait_in_seconds=5, scroll=2)
-    print(f"{len(comments)} comments scraped from sample post.")
-
-
-# -------------------------------------------------------
 # FULL PIPELINE: loop through topics > posts > comments
 # -------------------------------------------------------
 
@@ -59,12 +38,12 @@ def reddit_scraping_all(output_folder="output", wait=5, scroll=2):
     print("\n[RUNNING] Full Reddit Scraping Pipeline")
     all_reddit_topics = scrape_all()
     save_csv(all_reddit_topics, f"{output_folder}/all_reddit_topics.csv")
-    print(f"✅ {len(all_reddit_topics)} topics saved to CSV.")
+    print(f"[topics] {len(all_reddit_topics)} topics saved to CSV.")
 
     all_results = []
 
     for topic, link in all_reddit_topics.items():
-        print(f"\n[TOPIC] {topic} - {link}")
+        print(f"\n[TOPIC] : {topic} - {link}")
         try:
             posts = scrape_post(link, wait_in_seconds=wait, scroll=scroll)
             print(f"> {len(posts)} posts found.")
@@ -80,5 +59,32 @@ def reddit_scraping_all(output_folder="output", wait=5, scroll=2):
         except Exception as e:
             print(f" TOPIC scraping {topic} : error {e}")
 
-    print("\n✅ Pipeline completed.")
+    print("\n [Pipeline] completed !")
     return all_results
+
+
+# -------------------------------------------------------
+# STEP-BY-STEP TEST: scrape topics, posts, and comments
+# -------------------------------------------------------
+
+if __name__ == "__main__":
+    # Step 1: Scrape all Reddit topics and save them
+    all_reddit_topics = scrape_all()
+    save_csv(all_reddit_topics, "output/all_reddit_topics.csv")
+    print(f"[topics] : {len(all_reddit_topics)} topics successfully scraped and saved.\n")
+
+    # Step 2: Scrape posts from a sample topic
+    sample_topic_link = "https://www.reddit.com/t/american_top_team/"
+    posts = scrape_post(sample_topic_link, wait_in_seconds=10, scroll=0)
+    print(f"[posts] : {len(posts)} posts scraped from sample topic.\n")
+
+    # Step 3: Scrape comments from a sample post
+    sample_post_link = "https://www.reddit.com/r/IndiaCricket/comments/1dniwap/aaron_finch_shuts_up_dk_during_commentary/"
+    comments = scrape_comment(post_url=sample_post_link, wait_in_seconds=5, scroll=2)
+    print(f"[comments] : {len(comments)} comments scraped from sample post.\n")
+
+    # Step 4: Full end-to-end pipeline
+    # Note: Uncomment the line below to run a full scrape of all topics, posts, and comments.
+    # This process may take considerable time due to the large volume of data.
+    # reddit_scraping_all()
+
