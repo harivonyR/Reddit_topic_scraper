@@ -32,16 +32,16 @@ def website_rendering(site_url, wait_in_seconds=5, scroll=0):
     if scroll == 0:
         response = requests.get(url, headers=headers, params=querystring)
     
-    # debug scrolling to bottom
+    # with scrolling
     else:
-        # smooth scrolling to the bottom
+        
         smooth_scroll = [
             {
                 "type": "scroll",
                 "x": 0,
-                "y": 2000,
-                "duration": 3,
-                "wait_time_s": 4
+                "y": 2000,         # scrolling height : 2000 pixels down
+                "duration": 3,     # scrolling duration
+                "wait_time_s": 4   # wait time in second (s) before the next instruction
             }
         ]
 

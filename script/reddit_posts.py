@@ -10,10 +10,10 @@ Topic Link : https://www.reddit.com/topics/a-1/
 
 """
 
-from script.piloterr import website_crawler, website_rendering
+from script.piloterr import  website_rendering # website_crawler
 from script.reddit_comments import scrape_comment
 from bs4 import BeautifulSoup
-
+from tqdm import tqdm
 
 # 1 - Fetch post data with post_link (we need this to fetch comments later)
 #------------------------------------------------------------------------------
@@ -36,15 +36,15 @@ def scrape_post(topic_url,wait_in_seconds=10, scroll=2 ):
     for article in articles:
         try:
             shreddit_post = article.find("shreddit-post")
-            post_link = "https://www.reddit.com"+article.find("a", href=True).get("href")
+            post_link = "https://www.reddit.com"+article.find("a", href=True).get("href",None)
             post = {
                 "title": article.get("aria-label","#N/A"),
                 "author": shreddit_post.get("author","#N/A"),
                 "link": post_link,
                 "date": shreddit_post.get("created-timestamp","#N/A"),
                 "comment_count": shreddit_post.get("comment-count", "#N/A"),
-                "score": shreddit_post.get("score","#N/A")#,
-                #"comment": scrape_comment(post_url=post_link,wait_in_seconds=5, scroll=2)
+                "score": shreddit_post.get("score","#N/A"),
+                "comment": scrape_comment(post_url=post_link,wait_in_seconds=5, scroll=2)
             }
             print(f"post scraped : {article.get('aria-label','#N/A')}")
             print("-------------------")
@@ -60,7 +60,3 @@ if __name__ == "__main__":
     # sample
     american_top_tem = "https://www.reddit.com/t/american_top_team/"
     posts = scrape_post(american_top_tem,wait_in_seconds=10, scroll=0)
-
-    
-    
-    

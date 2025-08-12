@@ -29,6 +29,7 @@ def get_letter_pages():
     letters_href.insert(0, site_url)
 
     print(f"> all topics found by lettre : \n {letters_href}")
+    print("\n\n")
     return letters_href
 
 def get_subpages(site_url):
@@ -44,7 +45,7 @@ def get_subpages(site_url):
     pages_href = ["https://www.reddit.com" + page.get("href") for page in pages]
     pages_href.insert(0, site_url)
 
-    print("> pages href : {pages_href}")
+    print(f"> found topic pages and subpage : {pages_href}")
     return pages_href
 
 def scrape_topics(site_url):

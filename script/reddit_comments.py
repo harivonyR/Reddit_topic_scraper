@@ -8,7 +8,7 @@ Created on Mon Jul 21 20:45:43 2025
 from script.piloterr import website_rendering
 from bs4 import BeautifulSoup
 
-# 2 - Fetch post data with post_link (we need this to fetch comments later)
+# 1 - Fetch post data with post_link (we need this to fetch comments later)
 #------------------------------------------------------------------------------
 def scrape_comment(post_url,wait_in_seconds=10, scroll=0):
     print("-------------------------------")
